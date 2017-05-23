@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>大数据监测指挥中心 - 数据分析平台</title>
+
+<!-- Bootstrap Core CSS -->
+<link href="__PUBLIC__/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- MetisMenu CSS -->
+<link href="__PUBLIC__/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="__PUBLIC__/dist/css/sb-admin-2.css" rel="stylesheet">
+<link href="__PUBLIC__/dist/css/page.css" rel="stylesheet">
+<!-- DataTables CSS -->
+<link href="__PUBLIC__/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+<!-- DataTables Responsive CSS -->
+<link href="__PUBLIC__/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="__PUBLIC__/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<style>
+
+</style>
+<body>
+<div id="wrapper">
+
+  <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+      <include file="Public:header" />
+      <!-- /.navbar-top-links -->
+      <div class="navbar-default sidebar" role="navigation" id="menu">
+          <include file="Public:menu" />
+      <!-- /.navbar-static-side -->
+      </div>
+  </nav>
+
+<!-- Page Content -->
+<div id="page-wrapper">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <h1 class="page-header">管理中心</h1>
+    </div>
+    <!-- /.col-lg-12 --> 
+  </div>
+  <div class="row">
+    <div class="col-lg-4 col-md-6">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3"> <i class="fa fa-database fa-5x"></i> </div>
+            <div class="col-xs-9 text-right">
+              <div class="huge"><{$fwq}>台</div>
+              <div>当前分配服务器</div>
+            </div>
+          </div>
+        </div>
+        <a href="#">
+        <div class="panel-footer"> <span class="pull-left"> </span> <span class="pull-right"></span>
+          <div class="clearfix"></div>
+        </div>
+        </a> </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <div class="panel panel-green">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3"> <i class="fa fa-tasks fa-5x"></i> </div>
+            <div class="col-xs-9 text-right">
+              <div class="huge"><{$tasks}>条</div>
+              <div>当前运行采集任务</div>
+            </div>
+          </div>
+        </div>
+        <a href="#">
+        <div class="panel-footer"> <span class="pull-left"> </span> <span class="pull-right"></span>
+          <div class="clearfix"></div>
+        </div>
+        </a> </div>
+    </div>
+    <div class="col-lg-4 col-md-6">
+      <div class="panel panel-yellow">
+        <div class="panel-heading">
+          <div class="row">
+            <div class="col-xs-3"> <i class="fa fa-file-text-o fa-5x"></i> </div>
+            <div class="col-xs-9 text-right">
+              <div class="huge"><{$articles}></div>
+              <div>当前数据记录</div>
+            </div>
+          </div>
+        </div>
+        <a href="#">
+        <div class="panel-footer"> <span class="pull-left"> </span> <span class="pull-right"></span>
+          <div class="clearfix"></div>
+        </div>
+        </a> </div>
+    </div>
+  </div>
+  <div class="dataTable_wrapper">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="panel panel-default">
+          <div class="panel-heading"> 监测任务 </div>
+          <!-- /.panel-heading -->
+          <div class="panel-body">
+            <div class="dataTable_wrapper">
+              <div  class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info">
+                      <thead>
+                        <tr role="row">
+                          <th   rowspan="1" colspan="1" >任务名称</th>
+                          <th  rowspan="1" colspan="1">监测渠道</th>
+                          <th rowspan="1" colspan="1">已采集记录</th>
+                          <th rowspan="1" colspan="1">监测时段</th>
+                          <th rowspan="1" colspan="1">任务状态</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      <foreach name="list" item="v">
+                        <tr class="gradeA odd" role="row">
+                            <td class="sorting_1"><{$v[task_name]}></td>
+                            <td class="">
+                              <?php if(strlen($v['web_site'])>2){?>
+                                <img src="__PUBLIC__/images/1.jpg" height="20">
+                                <img src="__PUBLIC__/images/3.jpg" height="20">
+                              <?php }else{ 
+                                echo "<img src='__PUBLIC__/images/$v[web_site].jpg' height='20'>";
+                              }?>
+                                
+                            </td>
+                            <td><{$v.article_count}></td>
+                            <td class="center">
+                              <?php echo substr($v['start_time'], 0,10).'--'.substr($v['end_time'], 0,10);?>
+                            </td>
+                            <td class="center">
+                              <if condition="($v.status eq 0)">等待处理
+                              <elseif condition="($v.status eq 1)"/>正在运行
+                              <elseif condition="($v.status eq 2)"/>成功
+                              <elseif condition="($v.status eq 3)"/>失败
+                              <elseif condition="($v.status eq 4)"/>失败
+                              <elseif condition="($v.status eq 5)"/>暂停
+                              <else />执行超时
+                              </if>
+                            </td>
+                        </tr>
+                      </foreach>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.table-responsive --> 
+            
+          </div>
+          <!-- /.panel-body --> 
+        </div>
+        <!-- /.panel --> 
+      </div>
+      <!-- /.col-lg-12 --> 
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <!-- <div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">共57条记录 当前第1至10条记录</div> --><div class='pages'><{$page}></div>
+      </div>
+<!--       <div class="col-sm-6">
+  <div class="dataTables_paginate paging_simple_numbers" id="dataTables-example_paginate">
+    <ul class="pagination">
+      <li class="paginate_button previous disabled" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_previous"><a href="#">上一页</a></li>
+      <li class="paginate_button active" aria-controls="dataTables-example" tabindex="0"><a href="#">1</a></li>
+      <li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">2</a></li>
+      <li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">3</a></li>
+      <li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">4</a></li>
+      <li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">5</a></li>
+      <li class="paginate_button " aria-controls="dataTables-example" tabindex="0"><a href="#">6</a></li>
+      <li class="paginate_button next" aria-controls="dataTables-example" tabindex="0" id="dataTables-example_next"><a href="#">下一页</a></li>
+    </ul>
+  </div>
+</div> -->
+    </div>
+    <div> 
+      
+      <!-- /.row --> 
+    </div>
+    <!-- /.container-fluid --> 
+  </div>
+  <!-- /#page-wrapper --> 
+  
+</div>
+<!-- /#wrapper --> 
+
+<!-- jQuery --> 
+<script src="__PUBLIC__/bower_components/jquery/dist/jquery.min.js"></script> 
+
+<!-- Bootstrap Core JavaScript --> 
+<script src="__PUBLIC__/bower_components/bootstrap/dist/js/bootstrap.min.js"></script> 
+
+<!-- Metis Menu Plugin JavaScript --> 
+<script src="__PUBLIC__/bower_components/metisMenu/dist/metisMenu.min.js"></script> 
+
+<!-- Custom Theme JavaScript --> 
+<script src="__PUBLIC__/dist/js/sb-admin-2.js"></script>
+</body>
+<script>
+        //加载菜单栏
+      $(function(){
+        $.post('__APP__/common/ajaxGetMenu',function(data){
+          $("#menu").html(data);
+          $("#menu ul li ul li a ").removeClass("active");
+          var c = "<?php echo MODULE_NAME.ACTION_NAME; ?>";
+          var d = "<?php echo MODULE_NAME?>";
+          //$('#menu ul li .'+d+'').addClass("active");
+          $('#menu ul li ul li .'+c+'').addClass("active");
+          $('#menu ul li ul li .'+c+'').parent().parent().addClass("in");
+          $('#menu ul li ul li .'+c+'').parent().parent().attr("aria-expanded","true");
+
+        })
+        $("#addCatSubmit").click(function(){
+                var search_name = $("input[name=search_name]").val();
+                $.post("__URL__/ajaxAddTaskCategoryHandle",{search_name:search_name},function(data){
+                    if(data=='ok'){
+                        $(".category .alert-success").removeClass("hidden");
+                    }else{
+                        $(".category .alert-danger").removeClass("hidden");
+                    }
+                })
+          
+        });
+      })
+
+</script>
+</html>

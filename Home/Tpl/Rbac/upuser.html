@@ -1,0 +1,112 @@
+          <include file="Public:header" />
+          <!-- /.navbar-top-links -->
+          <div class="navbar-default sidebar" role="navigation" id="menu">
+              <include file="Public:menu" />
+          <!-- /.navbar-static-side -->
+          </div>
+      </nav>
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+				<center>
+					<fieldset style="width:760px">
+						<legend>修改账号密码</legend>
+						<form onsubmit="return check_form()" method="post" action="" name="form1">
+							<p align="left">
+							帐号：
+								<input id="name" class="EditBox" value="<{$username}>">
+							密码：
+							<input id="passwd" class="EditBox" type="password">
+								<input id="uid" type="hidden" value="<{$uid}>">
+								<input class="ButtonCss" type="submit" value="存储" name="button" id="button"><span id="result1" style="margin-left:30px;color:red"></span><span></span> 	
+							</p>
+						</form>
+					</fieldset>
+					<fieldset style="width:760px">
+						<legend>修改账户启/禁用</legend>
+						<form onsubmit="return check_form3()" method="post" action="" name="form1">
+							<p align="left">
+							账户状态：
+								<select name="" id="status">
+									<option value="1">启用</option>					
+									<option value="2">禁用</option>					
+								</select>
+								<input id="button3" class="ButtonCss" type="submit" value="存储" name="button"><span id="result3" style="margin-left:30px;color:red"> 	
+							</p>
+						</form>
+					</fieldset>
+				</center>
+			</div>
+		</div>
+	</div>
+    <!-- jQuery -->
+    <script src="__PUBLIC__/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="__PUBLIC__/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="__PUBLIC__/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="__PUBLIC__/dist/js/sb-admin-2.js"></script>
+    <script>
+    //加载菜单栏
+      $(function(){
+        $.post('__APP__/common/ajaxGetMenu',function(data){
+          $("#menu").html(data);
+          $("#menu ul li ul li a ").removeClass("active");
+          var c = "<?php echo MODULE_NAME.ACTION_NAME; ?>";
+          var d = "<?php echo MODULE_NAME?>";
+          //$('#menu ul li .'+d+'').addClass("active");
+          $('#menu ul li ul li .'+c+'').addClass("active");
+          $('#menu ul li ul li .'+c+'').parent().parent().addClass("in");
+          $('#menu ul li ul li .'+c+'').parent().parent().attr("aria-expanded","true");
+        })
+      })
+
+    </script>
+<script>
+//拿到权限类型
+var baseUrl="<?php echo '__ROOT__';?>";
+
+$(function(){
+	$("#button").bind("click",function(){
+		check_form();
+		return false;
+	})	
+	$("#button3").bind("click",function(){
+		check_form3();
+		return false;
+	})
+})
+function check_form(){
+	var uid = $('#uid').val();
+	var name = $('#name').val();
+	var pass = $('#passwd').val();
+	if(name=='' || pass==''){
+		$('#result1').html('账号密码不可以为空');return false;
+	}
+	$.post(baseUrl+'/rbac/ajaxSaveUser',{uid:uid,name:name,pass:pass},function(data){
+		if(data=='ok'){
+			$('#result1').html('修改成功');
+		}else{
+			$('#result1').html('修改失败，注意用户名的唯一性');
+		}
+	})
+}
+
+function check_form3(){
+	var uid = $('#uid').val();
+	var status = $('#status').val();
+	$.post(baseUrl+'/rbac/ajaxSaveUserStatus',{uid:uid,status:status},function(data){
+		if(data=='no'){
+			$('#result3').html('修改失败');
+		}else{
+			$('#result3').html('修改成功');
+		}
+	})
+}
+</script>
+</body>
+</html>s

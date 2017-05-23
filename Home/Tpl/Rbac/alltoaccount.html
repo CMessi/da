@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>大数据监测指挥中心 - 用户组</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="__PUBLIC__/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="__PUBLIC__/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="__PUBLIC__/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="__PUBLIC__/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <include file="Public:header" />
+            <!-- /.navbar-top-links -->
+            <div class="navbar-default sidebar" role="navigation" id="menu">
+                <include file="Public:menu" />
+            <!-- /.navbar-static-side -->
+            </div>
+        </nav>
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+				<form method="post" action="<{:U('rbac/ajaxUpAccess')}>" name="form1">
+					<fieldset style="width:760px">
+						<legend>
+						为
+							<font color="red"><{$name}></font>
+						账户分配权限
+						</legend>
+					<br>
+						<p align="left"> </p>
+						<table id="List" class="List" width="750">
+							<tbody>
+								<tr>
+									<td>
+								<volist name="nodeList" id="v">
+
+											<p style="text-indent:<{$v['level']*30}>px;<if condition='$v.level eq 3'>float:left;margin-left:-20px<else />clear:both;</if>">
+
+												<input id="<{$v.id}>" type="checkbox" name="access[]" value="<{$v.id}>_<{$v.level}>" pid="<{$v.pid}>" level="<{$v.level}>" <if condition="$v['access'] eq 1"> checked="checked"</if>/>
+
+												<if condition="$v.level eq 1">
+													<span style="color:red">项目入口</span>
+												<elseif condition="$v.level eq 2"/>
+													<span style="color:green">一级菜单</span>
+												</if>
+												<span value="<{$v.id}>" for=""><{$v.title}></span>										
+											</p>
+										</volist>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					<br>
+					</fieldset>
+
+					<p align="right">
+						<input type="hidden" value="<{$rid}>" name="rid">
+						<input type="hidden" value="allot_account" name="from_file">
+						<input id="button" class="ButtonCss" type="submit" value="存储" name="button">
+						<input id="reset" onclick="reset1()" class="ButtonCss" type="reset" value="重置" name="reset">
+					</p>
+				</form>	
+			</div>
+		</div>
+	</div>
+    <!-- jQuery -->
+    <script src="__PUBLIC__/bower_components/jquery/dist/jquery.min.js"></script>
+
+
+
+    <!-- Custom Theme JavaScript -->
+    
+    <script>
+    //加载菜单栏
+      $(function(){
+        $.post('__APP__/common/ajaxGetMenu',function(data){
+          $("#menu").html(data);
+          $("#menu ul li ul li a ").removeClass("active");
+          var c = "<?php echo MODULE_NAME.ACTION_NAME; ?>";
+          var d = "<?php echo MODULE_NAME?>";
+          //$('#menu ul li .'+d+'').addClass("active");
+          $('#menu ul li ul li .'+c+'').addClass("active");
+          $('#menu ul li ul li .'+c+'').parent().parent().addClass("in");
+          $('#menu ul li ul li .'+c+'').parent().parent().attr("aria-expanded","true");
+        })
+      })
+
+    </script>
+<script>
+var baseUrl="<?php echo '__ROOT__';?>";
+//复选框   
+//单击上级目录 下面子菜单全选中 再单击取消    
+//单击子菜单  默认选中一直上级的菜单
+	$(function(){
+		$('input').click(function(){
+			var level = $(this).attr('level');
+
+			if(level == 1){
+				var str = '_';
+				var inputs = $('input[value*='+str+']');
+				if($(this).is(':checked')){
+					inputs.prop('checked',true);
+				}else{
+					inputs.removeAttr('checked');
+				}
+			}else if(level == 2){
+				var str = $(this).attr('id');
+				var inputs = $('input[pid='+str+']');
+				$(this).prop('checked')?inputs.prop('checked',true):inputs.removeAttr('checked');
+			}else if(level==3){
+				//if($(this).attr('checked')){
+					var pid = $(this).attr('pid');
+					$('input[id='+pid+']').prop('checked',true);
+					var ppid = $('input[id='+pid+']').attr('pid');
+					$('input[id='+ppid+']').prop('checked',true);
+				//}//else{
+				//	console.info(1)
+				//}
+			}
+		})
+	})
+	function reset1(){
+		$('input:checkbox').removeAttr('checked');
+	}
+</script>
+</body>
+</html>s

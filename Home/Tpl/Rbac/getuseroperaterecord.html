@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>后台</title>
+
+<link rel="stylesheet" href="__PUBLIC__/css/default.css" type="text/css"></link>
+<script type="text/javascript" src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+<script src="__PUBLIC__/js/configure.ini.js" type="text/javascript">
+ </script>
+<script src="__PUBLIC__/js/ym_prompt/ymPrompt.js" type="text/javascript">
+ </script>
+
+
+<script>
+var baseUrl="<?php echo '__ROOT__';?>";
+$.post(baseUrl+'/rbac/useroperaterecord',function(data){
+	$('#tableList').html(data);
+})
+function searchName(){
+	var user_id = $('#user_name').val();
+	var operate = $('#operate').val();
+	var fromDate = $('#fromDate').val();
+	var endDate = $('#endDate').val();
+	var param = {user_id:user_id,operate:operate,fromDate:fromDate,endDate:endDate};
+	$.post(baseUrl+'/rbac/useroperaterecord',param,function(data){
+		$('#tableList').html(data);
+	})
+
+}
+</script>
+
+</head>
+<body>
+	<!--搜索栏-->
+		<fieldset style="width:100%">
+			<p align="left">
+				<input id="user_name" class="EditBox" >
+				<input  class="ButtonCss" type="submit" value="搜索管理员姓名" onclick="searchName()">&nbsp;
+				<input id="operate" class="EditBox" >
+				<input  class="ButtonCss" type="submit" value="搜索操作类型" onclick="searchName()">&nbsp;
+				<input id="fromDate" class="sang_Calender" />
+				<span>到</span>
+				<input id="endDate" class="sang_Calender" />
+				<input  class="ButtonCss" type="submit" value="搜索时间段" onclick="searchName()">&nbsp;
+
+			</p>
+		</fieldset>
+	<div id="tableList">
+		<include file="Public:useroperaterecord">
+	</div>
+</body>
+<script src="__PUBLIC__/js/calendar.js" type="text/javascript">
+ </script>
+</html>

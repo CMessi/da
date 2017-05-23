@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>大数据监测指挥中心 - 添加节点</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="__PUBLIC__/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="__PUBLIC__/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="__PUBLIC__/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="__PUBLIC__/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!--datetimepicker Css-->
+    <link href="__PUBLIC__/dist/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+
+</head>
+<body>
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <include file="Public:header" />
+            <!-- /.navbar-top-links -->
+            <div class="navbar-default sidebar" role="navigation" id="menu">
+                <include file="Public:menu" />
+            <!-- /.navbar-static-side -->
+            </div>
+        </nav>
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+				
+				<div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">任务管理 - 添加任务</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+				
+			<div class="row">
+               <div class="col-lg-6">
+                 <div class="form-group">
+                                            <label>任务名称</label>
+                                            <input  class="form-control" placeholder="请输入任务名称" name="task_name">
+                </div>
+				 <div class="form-group">
+                                            <label>监测关键字</label>
+                                            <input  class="form-control" placeholder="请输入监测任务主关键字" name="kwds">
+                </div>
+				
+				<div class="form-group">
+                                            <label>数据来源&nbsp;&nbsp;</label>
+   
+                                        <foreach name="list" item="v">
+                                            <label class="checkbox-inline">
+                                                <input name="site_id" type="checkbox" value="<{$v.bid}>-<{$v.fid}>"><{$v.name}>
+                                            </label>
+                                        </foreach>
+                                            
+                                        </div>
+                <div class="form-group">
+                                          <label>监测频率</label>
+                                          <select name="search_type"  class="form-control" >
+                          									<option value="1">始终</option>
+                          									<option value="2">仅一次</option>
+                          								</select>
+                </div>
+				
+	<label>监测时间段</label>
+	<div class="form-group input-group " id="datetimepicker" >
+     <input type="text" class="form-control" placeholder="请选择起始时间" name="start_time"></input>
+	  <span class="input-group-btn add-on">
+        <button class="btn btn-default" type="button"> <i class="fa fa-calendar" data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </button>
+     </span>
+	</div>
+	 <div class="form-group input-group " id="datetimepicker2" >
+     <input type="text" class="form-control" placeholder="请选择结束时间，为空则默认为今日" name="end_time"></input>
+	  <span class="input-group-btn add-on">
+        <button class="btn btn-default" type="button"> <i class="fa fa-calendar" data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
+      </button>
+     </span>
+      </div>
+                
+				<button type="submit" class="btn btn-default" onclick="getTaskInfo()">确定</button>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+
+				
+			</div>
+		</div>
+	</div>
+    <!-- jQuery -->
+    <script src="__PUBLIC__/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="__PUBLIC__/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="__PUBLIC__/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="__PUBLIC__/dist/js/sb-admin-2.js"></script>
+    <script src="__PUBLIC__/dist/js/bootstrap-datetimepicker.min.js"></script>
+   <script src="__PUBLIC__/dist/js/bootstrap-datetimepicker.pt-BR.js"></script>
+    <script>
+    //加载菜单栏
+      $(function(){
+        $.post('__APP__/common/ajaxGetMenu',function(data){
+          $("#menu").html(data);
+          $("#menu ul li ul li a ").removeClass("active");
+          var c = "<?php echo MODULE_NAME.ACTION_NAME; ?>";
+          var d = "<?php echo MODULE_NAME?>";
+          //$('#menu ul li .'+d+'').addClass("active");
+          $('#menu ul li ul li .'+c+'').addClass("active");
+          $('#menu ul li ul li .'+c+'').parent().parent().addClass("in");
+          $('#menu ul li ul li .'+c+'').parent().parent().attr("aria-expanded","true");          
+        })
+		//日期
+		$('#datetimepicker').datetimepicker({
+		 format: 'yyyy-MM-dd',
+     	 language: 'cn'
+    		});
+		$('#datetimepicker2').datetimepicker({
+		 format: 'yyyy-MM-dd',
+     	 language: 'cn'
+    		});
+      })
+
+    </script>
+
+<script>
+	function getTaskInfo(){
+    var task_name = $("input[name='task_name']").val();
+    var kwds = $("input[name='kwds']").val();
+    //var site_id = $("input[name='site_id']").val();
+    //var task_name = $("input[name='task_name']").val();
+    var search_type = $("select[name='search_type']").val();
+    var start_time = $("input[name='start_time']").val();
+    var end_time = $("input[name='end_time']").val();
+    //console.info(search_type);
+    var site_id=""; 
+    $("input[type='checkbox']:checkbox:checked").each(function(){ site_id+=$(this).val()+","; });
+
+
+
+    $.post("__URL__/ajaxAddTaskHandle",{task_name:task_name,kwds:kwds,search_type:search_type,start_time:start_time,end_time:end_time,site_id:site_id},function(data){
+        if(data=='ok'){
+          alert("添加成功");
+        }else{
+          alert("添加失败");
+        }
+    })
+    
+	}
+
+
+
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>大数据监测指挥中心 - 数据分析平台</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="__PUBLIC__/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="__PUBLIC__/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="__PUBLIC__/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="__PUBLIC__/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	  <!-- Morris Charts CSS -->
+    <link href="__PUBLIC__/bower_components/morrisjs/morris.css" rel="stylesheet">
+
+    <style type="text/css">
+    .pagination {
+    	margin: 0px;
+    }
+    </style>
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+          <include file="Public:header" />
+          <!-- /.navbar-top-links -->
+          <div class="navbar-default sidebar" role="navigation" id="menu">
+              <include file="Public:menu" />
+          <!-- /.navbar-static-side -->
+          </div>
+        </nav>
+
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">竞品分析 （<?php echo $_GET['kwds'].' - '.$_GET['c'];?>）</h1>
+						
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+			<div class="row">
+           
+      
+	  <div class="row">
+                
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            最近30天微博情感趋势图（正向）
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="morris-line"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+               
+				
+				
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           最近30天微博情感趋势图
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div id="morris-bar"></div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                
+		
+       
+      
+      <!-- /.col-lg-12 --> 
+    </div>	
+			
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="__PUBLIC__/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="__PUBLIC__/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="__PUBLIC__/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="__PUBLIC__/dist/js/sb-admin-2.js"></script>
+    
+    <!-- Morris Charts JavaScript -->
+    <script src="__PUBLIC__/bower_components/raphael/raphael-min.js"></script>
+    <script src="__PUBLIC__/bower_components/morrisjs/morris.min.js"></script>
+
+ <script>
+ $(function(){
+	 var tax_data = [
+       {"dateX": "2016-5-1", "kts": 3407, "ems": 660},
+       {"dateX": "2016-5-2", "kts": 3351, "ems": 629},
+       {"dateX": "2016-5-3", "kts": 3269, "ems": 618},
+       {"dateX": "2016-5-4", "kts": 3246, "ems": 661},
+       {"dateX": "2016-5-5", "kts": 3171, "ems": 676},
+       {"dateX": "2016-5-6", "kts": 3155, "ems": 681},
+       {"dateX": "2016-5-7", "kts": 3226, "ems": 620},
+       {"dateX": "2016-5-8", "kts": 3245, "ems": 904},
+	   {"dateX": "2016-5-9", "kts": 3245, "ems": 904},
+	   {"dateX": "2016-5-10", "kts": 3245, "ems": 904},
+	   {"dateX": "2016-5-11", "kts": 3245, "ems": 904},
+	   {"dateX": "2016-5-12", "kts": 3245, "ems": 904},
+	   {"dateX": "2016-5-13", "kts": 3245, "ems": 904},
+	   {"dateX": "2016-5-14", "kts": 3245, "ems": 904},
+	   {"dateX": "2016-5-15", "kts": 3245, "ems": 904},
+       {"dateX": "2016-5-30", "kts": 3289, "ems": 860}
+  ];
+  Morris.Line({
+    element: 'morris-line',
+    data: tax_data,
+    xkey: 'dateX',
+	lineColors:[ "#5B9BD5", "#ED7D31"], 
+    ykeys: ['kts', 'ems'],
+    labels: ['崆峒山', '峨眉山']
+  });
+Morris.Bar({
+  element: 'morris-bar',
+  data: [
+    {x: '2011 Q1', y: 3, z: 2, a: 3},
+    {x: '2011 Q2', y: 2, z: null, a: 1},
+    {x: '2011 Q3', y: 0, z: 2, a: 4},
+    {x: '2011 Q4', y: 2, z: 4, a: 3}
+  ],
+  xkey: 'x',
+  ykeys: ['y', 'z', 'a'],
+  labels: ['Y', 'Z', 'A']
+}).on('click', function(i, row){
+  console.log(i, row);
+});
+});
+ </script>
+</body>
+<script>
+    $(function(){
+        $.post('__APP__/common/ajaxGetMenu',function(data){
+          $("#menu").html(data);
+          $("#menu ul li ul li a ").removeClass("active");
+          var c = "<?php echo MODULE_NAME.ACTION_NAME; ?>";
+          var d = "<?php echo MODULE_NAME?>";
+          //$('#menu ul li .'+d+'').addClass("active");
+          $('#menu ul li ul li .'+c+'').addClass("active");
+          $('#menu ul li ul li .'+c+'').parent().parent().addClass("in");
+          $('#menu ul li ul li .'+c+'').parent().parent().attr("aria-expanded","true");
+
+        })       
+    })
+</script>
+</html>

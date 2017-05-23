@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>大数据监测指挥中心 - 数据分析平台</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="__PUBLIC__/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="__PUBLIC__/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="__PUBLIC__/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="__PUBLIC__/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+	<link href="__PUBLIC__/css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+	<style type="text/css">
+	.tab-content .list-group .list-group-item {
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+    .tab-content .list-group .list-group-item .panel.panel-default {
+	margin-bottom: 10px;
+}
+    .pagination {
+	margin-top: 0px;
+}
+    .youxuliebiao {
+	font-size: 12px;
+	padding-left: 15px;
+}
+	.youxuliebiao li{line-height:250%}
+    .youxuliebiao li .btn{
+	margin: 0px;
+	padding: 0px;
+}
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+      
+      <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+          <include file="Public:header" />
+          <!-- /.navbar-top-links -->
+          <div class="navbar-default sidebar" role="navigation" id="menu">
+              <include file="Public:menu" />
+          <!-- /.navbar-static-side -->
+          </div>
+      </nav>
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">任务分析</h1>
+						<div class="panel panel-default">
+                        
+                        <div class="panel-body">
+                           
+						    <div class="col-md-5">时间选择：
+							<button type="button" class="btn btn-primary quickdate btn-sm">今日</button>
+							<button type="button" class="btn btn-outline btn-primary quickdate btn-sm">本周</button>
+							<button type="button" class="btn btn-outline btn-primary quickdate btn-sm">上周</button>
+							<button type="button" class="btn btn-outline btn-primary quickdate btn-sm">本月</button>
+							<button type="button" class="btn btn-outline btn-primary quickdate btn-sm">上月</button>
+							
+							
+				<div class="form-group quickchangedate">
+                
+                <div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+				<input type="hidden" id="dtp_input1" value="" /><br/>
+            </div>
+			<div class="form-group quickchangedate">
+                
+                <div class="input-group date form_date " data-date="" data-date-format="yyyy-mm-dd" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
+                    <input class="form-control" size="16" type="text" value="" readonly>
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                </div>
+				<input type="hidden" id="dtp_input2" value="" /><br/>
+            </div>
+						
+							<button type="button" class="btn btn-outline btn-primary btn-sm" id="changedate">自选</button>
+							</div>
+							<div class="col-md-4">情感筛选：
+							
+							<button type="button" class="btn btn-primary  btn-sm">全部</button>
+							<button type="button" class="btn btn-outline btn-primary  btn-sm">正面</button>
+							<button type="button" class="btn btn-outline btn-primary  btn-sm">负面</button>
+							<button type="button" class="btn btn-outline btn-primary  btn-sm">中性</button>
+							
+							</div>
+							<div class="col-md-3">相似文章：
+							
+							<button type="button" class="btn btn-primary  btn-sm">合并</button>
+							<button type="button" class="btn btn-outline btn-primary  btn-sm">展开</button>
+							
+							</div>
+						 
+						  
+ <br/> <br/>
+						   <div class="col-md-5 form-inline">帖子搜索：
+							
+							<button type="button" class="btn btn-primary  btn-sm">搜标题</button>
+							<button type="button" class="btn btn-outline btn-primary  btn-sm">搜全文</button>
+							<div class="form-group input-group col-md-5">
+                                            <input type="text" class="form-control" placeholder="请输入关键词">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                                                </button>
+                                            </span>
+                                        </div>
+							
+							</div>
+							<div class="col-md-4">批量操作：
+							
+							<button type="button" class="btn btn-primary btn-outline btn-sm">导出</button>
+							
+							
+							</div>
+						  <div class="col-md-3">
+							
+							<button type="button" class="btn btn-primary btn-outline ">筛选</button>
+							
+							
+							</div>
+                        </div>
+                        
+                    </div>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+				
+			<div class="row">
+			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                            <h4 class="modal-title" id="myModalLabel">主题分类管理</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row"><div class="col-sm-12">
+             
+			
+			<div class="form-group">
+                                            <label>选择主题</label>
+                                            <select class="form-control">
+                                                <option>满意度</option>
+                                                <option>市场机会</option>
+                                               
+                                            </select>
+                                        </div>
+            
+			<div class="form-group">
+                                            <label>选择主题分类</label>
+                                            <select class="form-control">
+                                                <option>收费情况</option>
+                                                <option>硬件设施</option>
+                                               
+                                            </select>
+                                        </div>
+                                            </div></div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-primary" data-dismiss="modal">提交</button>
+                                        </div>
+                                    </div>
+                                    <!-- /.modal-content -->
+                                </div>
+                                <!-- /.modal-dialog -->
+                            </div>
+                    <div class="col-lg-8">
+                       
+						<div class="panel panel-default" data-find="_2">
+                        
+                        <!-- /.panel-heading -->
+                        <div class="panel-body" data-find="_1">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true">微博<span class="badge">42</span></a>
+                                </li>
+                                <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false">微信<span class="badge">42</span></a>
+                                </li>
+                                
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade active in" id="home">
+                                    
+                                    <p><div class="alert alert-info">
+                               <input name="" type="checkbox" value=""> 仅显示标星帖子
+                            </div></p>
+                                   <div class="well">
+                        <div>
+						 <div class="pull-right">对选中帖子：
+						 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">主题分类</button> 
+							<div class="btn-group">
+								<button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown">修改感情值 <span class="caret"></span></button>
+								<ul class="dropdown-menu" role="menu">
+								  <li><a href="#">正面</a></li>
+								  <li><a href="#">负面</a></li>
+								  <li><a href="#">中性</a></li>
+								  
+								</ul> 
+								
+							  </div> <button type="button" class="btn btn-info">删除</button> 
+								 <button type="button" class="btn btn-info">合并</button>
+		 
+						</div>
+						<input name="" type="checkbox" value="" id="selectAll"> 全选  <select style="width:128px;" autocomplete="off">
+                                        <option value="similar_num">按热度排序</option>
+                                        <option value="createdOn">按时间排序</option>
+                                    </select>
+										<div style="margin-top:10px">每页显示
+                                        <select>
+                                            <option value="10">10</option>
+                                            <option value="20" selected="selected">20</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </select>
+										</div>
+						</div>
+                                       
+                                    
+                    </div> 
+                                    <div >
+                                      <ul class="list-group" id="list">
+                                        <li class="list-group-item">
+                                        <div class="panel panel-default">
+                                               <div class="panel-body">
+                                                  <div><input type="checkbox" name="checkbox" >
+                                       	    <a href="#">甘肃省年内实现5A级景区高速公路连通</a></div>
+                                            <small><div>2016-05-14 来自 <a href="#">新浪网——新闻中心</a></div></small>
+                                               </div>
+                                               <div class="panel-footer"><div class="text-right">共有<span class="text-danger">11</span>个相似的内容&nbsp;<button type="button" class="btn btn-link glyphicon glyphicon-star-empty"></button><button type="button" class="btn btn-link glyphicon glyphicon-trash"></button></div></div>
+                                            </div>
+                                       	  </li>
+                                        <li class="list-group-item">
+                                        <div class="panel panel-default">
+                                               <div class="panel-body">
+                                                  <div><input type="checkbox" name="checkbox" >
+                                       	    <a href="#">甘肃省年内实现5A级景区高速公路连通</a></div>
+                                            <small><div>2016-05-14 来自 <a href="#">新浪网——新闻中心</a></div></small>
+                                               </div>
+                                               <div class="panel-footer"><div class="text-right">共有<span class="text-danger">11</span>个相似的内&nbsp;<button type="button" class="btn btn-link glyphicon glyphicon-star"></button><button type="button" class="btn btn-link glyphicon glyphicon-trash"></button></div></div>
+                                            </div>
+                                       	  </li>
+                                          <li class="list-group-item">
+                                        <div class="panel panel-default">
+                                               <div class="panel-body">
+                                                  <div><input type="checkbox" name="checkbox" >
+                                       	    <a href="#">甘肃省年内实现5A级景区高速公路连通</a></div>
+                                            <small><div>2016-05-14 来自 <a href="#">新浪网——新闻中心</a></div></small>
+                                               </div>
+                                               <div class="panel-footer"><div class="text-right">共有<span class="text-danger">11</span>个相似的内容&nbsp;<button type="button" class="btn btn-link glyphicon glyphicon-star"></button><button type="button" class="btn btn-link glyphicon glyphicon-trash"></button></div></div>
+                                            </div>
+                                       	  </li>
+                                          <li class="list-group-item">
+                                        <div class="panel panel-default">
+                                               <div class="panel-body">
+                                                  <div><input type="checkbox" name="checkbox" >
+                                       	    <a href="#">甘肃省年内实现5A级景区高速公路连通</a></div>
+                                            <small><div>2016-05-14 来自 <a href="#">新浪网——新闻中心</a></div></small>
+                                               </div>
+                                               <div class="panel-footer"><div class="text-right">共有<span class="text-danger">11</span>个相似的内容&nbsp;<button type="button" class="btn btn-link glyphicon glyphicon-star"></button><button type="button" class="btn btn-link glyphicon glyphicon-trash"></button></div></div>
+                                            </div>
+                                       	  </li>
+                                          <li class="list-group-item">
+                                        <div class="panel panel-default">
+                                               <div class="panel-body">
+                                                  <div><input type="checkbox" name="checkbox" >
+                                       	    <a href="#">甘肃省年内实现5A级景区高速公路连通</a></div>
+                                            <small><div>2016-05-14 来自 <a href="#">新浪网——新闻中心</a></div></small>
+                                               </div>
+                                               <div class="panel-footer"><div class="text-right">共有<span class="text-danger">11</span>个相似的内容&nbsp;<button type="button" class="btn btn-link glyphicon glyphicon-star"></button><button type="button" class="btn btn-link glyphicon glyphicon-trash"></button></div></div>
+                                            </div>
+                                       	  </li>
+                                          <li class="list-group-item">
+                                        <div class="panel panel-default">
+                                               <div class="panel-body">
+                                                  <div><input type="checkbox" name="checkbox" >
+                                       	    <a href="#">甘肃省年内实现5A级景区高速公路连通</a></div>
+                                            <small><div>2016-05-14 来自 <a href="#">新浪网——新闻中心</a></div></small>
+                                               </div>
+                                               <div class="panel-footer"><div class="text-right">共有<span class="text-danger">11</span>个相似的内容&nbsp;<button type="button" class="btn btn-link glyphicon glyphicon-star"></button><button type="button" class="btn btn-link glyphicon glyphicon-trash"></button></div></div>
+                                            </div>
+                                       	  </li>
+                                      </ul>
+                                    </div>
+                                    <div class="row"><div class="col-sm-6"><div class="dataTables_info" id="dataTables-example_info" role="status" aria-live="polite">当前1-20条 共57条</div></div><div class="col-sm-6">
+                                    <ul class="pagination">
+        <li class="disabled"><a href="#">«</a></li>
+        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+        <li><a href="#">2</a></li>
+        <li><a href="#">3</a></li>
+        <li><a href="#">4</a></li>
+        <li><a href="#">5</a></li>
+        <li><a href="#">»</a></li>
+     </ul></div></div>
+                              </div>
+                                <div class="tab-pane fade" id="profile">
+                                    <h4>Profile Tab</h4>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    </div>
+                     <!-- /.col-lg-8 -->
+                      <div class="col-lg-4">
+                       
+						<div class="panel panel-default" data-find="_2">
+                        
+                        <!-- /.panel-heading -->
+                        <div class="panel-body" data-find="_1">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a  href="#good" data-toggle="tab" aria-expanded="true"><span class="fa fa-smile-o" style="font-size:18px; color:#F00"></span> 内容（正面）</a>
+                                </li>
+                                <li class=""><a href="#bad" data-toggle="tab" aria-expanded="false"><span class="fa fa-frown-o" style="font-size:18px; color:#06F"></span> 内容（负面）</a>
+                                </li>
+                                
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane fade active in" id="good">
+                                    
+                                    <p></p>
+                                  <ol class="youxuliebiao">
+                                      <li><div class="pull-right">
+							 <button type="button" class="btn btn-link glyphicon glyphicon-trash"></button>
+							</div><a href="#">甘肃崆峒山五月飞雪 云海翻滚（组图）</a></li> 
+                                        <li>
+										<div class="pull-right">
+							 <button type="button" class="btn btn-link glyphicon glyphicon-trash"></button>
+							</div>
+							<a href="#">甘肃平凉泾河湿地发现国家一级保护动物...</a></li> 
+                                       
+                                      <li>
+									  <div class="pull-right">
+							 <button type="button" class="btn btn-link glyphicon glyphicon-trash"></button>
+							</div>
+							<a href="#">崆峒山 五月飞雪 云海翻滚</a></li>
+                                      <li>
+									  <div class="pull-right">
+							 <button type="button" class="btn btn-link glyphicon glyphicon-trash"></button>
+							</div>
+							<a href="#">崆峒山下有"古镇" 甘肃平凉"三年磨一剑"(图)</a></li>
+                                      <li>
+									  <div class="pull-right">
+							 <button type="button" class="btn btn-link glyphicon glyphicon-trash"></button>
+							</div>
+							<a href="#">各级纪检监察机关查处96起违反中央八...</a></li>
+                                      <li>
+									  <div class="pull-right">
+							 <button type="button" class="btn btn-link glyphicon glyphicon-trash"></button>
+							</div>
+							<a href="#">5月1日崆峒山上游人如织人头攒动</a></li>
+                                      <li>
+									  <div class="pull-right">
+							 <button type="button" class="btn btn-link glyphicon glyphicon-trash"></button>
+							</div>
+							<a href="#">“5.15”铁路列车运行图调整</a></li>
+							  <li>
+									  <div class="pull-right">
+							 <button type="button" class="btn btn-link glyphicon glyphicon-trash"></button>
+							</div>
+							<a href="#">“5.15”铁路列车运行图调整</a></li>
+							  <li>
+									  <div class="pull-right">
+							 <button type="button" class="btn btn-link glyphicon glyphicon-trash"></button>
+							</div>
+							<a href="#">“5.15”铁路列车运行图调整</a></li>
+							  <li>
+									  <div class="pull-right">
+							 <button type="button" class="btn btn-link glyphicon glyphicon-trash"></button>
+							</div>
+							<a href="#">“5.15”铁路列车运行图调整</a></li>
+                                    </ol>
+                                    <div>
+                                      
+                                    </div>
+                                   
+                              </div>
+                                <div class="tab-pane fade" id="bad">
+                                    <h4>Profile Tab</h4>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    </div>
+                   
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="__PUBLIC__/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="__PUBLIC__/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="__PUBLIC__/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="__PUBLIC__/dist/js/sb-admin-2.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="__PUBLIC__/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script>
+        //加载菜单栏
+      $(function(){
+        $.post('__APP__/common/ajaxGetMenu',function(data){
+          $("#menu").html(data);
+          $("#menu ul li ul li a ").removeClass("active");
+          var c = "<?php echo MODULE_NAME.ACTION_NAME; ?>";
+          var d = "<?php echo MODULE_NAME?>";
+          //$('#menu ul li .'+d+'').addClass("active");
+          $('#menu ul li ul li .'+c+'').addClass("active");
+          $('#menu ul li ul li .'+c+'').parent().parent().addClass("in");
+          $('#menu ul li ul li .'+c+'').parent().parent().attr("aria-expanded","true");
+
+        })
+      })
+    </script>
+<script>
+$(function(){
+	$(".quickchangedate").hide();
+	showdate=1;
+	$("#changedate").click(function(){
+	   if(showdate==1){
+			 $(".quickdate").hide();
+			 $(".quickchangedate").show();
+			 showdate=0;
+		}
+		else{
+			 $(".quickdate").show();
+			 $(".quickchangedate").hide();
+			 showdate=1;
+		}
+	   
+	});
+	$('.form_date').datetimepicker({
+        language:  'zh-CN',
+        weekStart: 1,
+        todayBtn:  1,
+		autoclose: 1,
+		todayHighlight: 1,
+		startView: 2,
+		minView: 2,
+		forceParse: 0
+    });
+	$("#selectAll").click(function(){    
+    if(this.checked){    
+        $("#list :checkbox").attr("checked", true);   
+    }else{    
+        $("#list :checkbox").attr("checked", false); 
+    }    
+});  
+});
+</script>
+</body>
+
+</html>

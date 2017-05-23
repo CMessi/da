@@ -1,0 +1,140 @@
+          <include file="Public:header" />
+          <!-- /.navbar-top-links -->
+          <div class="navbar-default sidebar" role="navigation" id="menu">
+              <include file="Public:menu" />
+          <!-- /.navbar-static-side -->
+          </div>
+      </nav>
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                      <form action="__URL__/user_mission_segmentation" method="get">  
+                        <div class="col-md-5 form-inline" id="article_search">
+                          <div class="form-group input-group col-md-5">
+                            <input type="text" class="form-control" placeholder="输入分词名称  " name="fenci_name" value="<{$fenci_name}>">
+                          </div>
+                           <button type="submit" class="btn btn-primary  btn-sm">搜索</button>
+                        </div>
+                    </form>
+                        <button type="button" class="btn btn-default " data-toggle="modal" data-target="#myModal">添加分词</button>
+                    </div>
+                </div>
+                <br>
+                <div class="col-sm-12">
+                  <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info">
+                  <thead>
+                    <tr role="row">
+                      <th class="center">分词名称</th>
+                      <th class="center">分词类型</th>
+                      <th class="center">操作</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <foreach name="list" item="v">
+                      <tr class="gradeA odd" role="row">
+                        <td class="center"><{$v.name}></td>
+                        <td class="center"><?php echo getNameByType($v['type'])?></td>
+                        <td class="center">
+                          <button type="button" class="btn btn-primary btn-xs" data-toggle="modal" onclick="showSetFenci(<{$v.id}>,'<{$v.name}>')" data-target="#myModal">修改</button> 
+                          <button type="button" class="btn btn-primary btn-xs" onclick="delFenci(<{$v.id}>)">删除</button>
+                        </td>
+                      </tr>
+                    </foreach> 
+                  </tbody>
+                </table>
+                <div class="showPage">
+                    <{$show}>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+<!--添加/修改分类dialog-->
+      <div class="row">
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                  <h4 class="modal-title" id="myModalLabel">分词设置 </h4>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-12">
+                    <table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info">
+                      <thead>
+                        <tr role="row">
+                          <th   rowspan="1" colspan="1" style="width: 175px;" >分词名称 <input type="text" id="fenciName"></th>
+                        </tr>
+                        <tr role="row">
+                          <th   rowspan="1" colspan="1" style="width: 175px;" >分词类型 
+                          <select name="fenciType" id="fenciType">
+                            <foreach name="fenci_types" item="v">
+                            <option value="<{$v.name_e}>"><{$v.name_c}></option>
+                            </foreach>
+                          </select>
+
+                          </th>
+                        </tr>
+                      </thead>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <input type="hidden" id="fenciId" value="">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="AddSetFenci()">保存</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+</body>
+
+<include file="Public:footer" />
+
+<script>
+//添加/修改分词
+  function AddSetFenci(){
+    var name = $("#fenciName").val();
+    var id = $("#fenciId").val();
+    var fenci_type = $("#fenciType").val();
+    if(name==''){
+      alert("填写分类名称");return false;
+    }
+     $.post("__URL__/ajaxAddFenci",{name:name,fenci_type:fenci_type,id:id},function(data){
+       if(data=='success'){
+         alert("保存成功");location.reload();
+       }else if(data=='exist'){
+         alert("保存失败,检查名称是否重复!");return false;
+       }else{
+        alert("保存失败,检查名称是否重复!");return false;
+       }
+     })       
+  }
+//修改分词弹框内容
+  function showSetFenci(id,name){
+    $("#fenciName").val(name);
+    $("#fenciId").val(id);
+  }
+//删除分词
+  function delFenci(id){
+    if(confirm("确定要删除该分词吗?")){
+      $.post("__URL__/ajaxDelFenci",{id:id},function(data){
+        if(data=='success'){
+          alert("删除成功");location.reload();
+        }else{
+          alert("删除失败");return false;
+        }
+      }) 
+    }
+  }
+
+</script>
+</html>

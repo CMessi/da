@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>大数据监测指挥中心 - 数据分析平台</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="__PUBLIC__/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="__PUBLIC__/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+	
+	<!-- Morris Charts CSS -->
+    <link href="__PUBLIC__/bower_components/morrisjs/morris.css" rel="stylesheet">
+
+
+    <!-- Custom CSS -->
+    <link href="__PUBLIC__/dist/css/sb-admin-2.css" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/dist/css/common.css">
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/js/jqcloud/jqcloud.css" />
+
+    <!-- Custom Fonts -->
+    <link href="__PUBLIC__/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+<style type="text/css">
+
+
+
+/* 提示自定义 */
+.stateTip, #StateTip{display:none; position:absolute; padding:8px; background:#fff; border:2px solid #2385B1; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; font-size:12px; font-family:Tahoma; color:#333;}
+
+.mapInfo i{ display:inline-block; width:15px; height:15px; margin-top:5px; line-height:15px; font-style:normal; background:#aeaeae; color:#fff; font-size:11px; font-family: Tahoma; -webkit-border-radius:15px; border-radius:15px; text-align:center}
+.mapInfo i.active{background:#E27F21;}
+.mapInfo span{ padding:0 5px 0 3px;}
+.mapInfo b{ font-weight:normal; color:#2770B5}
+</style>
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+          <include file="Public:header" />
+          <!-- /.navbar-top-links -->
+          <div class="navbar-default sidebar" role="navigation" id="menu">
+              <include file="Public:menu" />
+          <!-- /.navbar-static-side -->
+          </div>
+        </nav>
+
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">旅游分析 - 崆峒山</h1>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+				<div class="row">
+				<div class="col-lg-12" data-find="_3">
+                  
+                       
+                        <!-- /.panel-heading -->
+                       
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs">
+                                <li class="active"><a href="#home" data-toggle="tab">满意度</a>
+                                </li>
+                                <li ><a href="#profile" data-toggle="tab">用户分析</a>
+                                </li>
+                                <li><a href="#messages" data-toggle="tab">品牌传播</a>
+                                </li>
+                                
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                         <div class="tab-pane fade in active" id="home">
+								
+								<div class="bk10"></div>
+                 <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           满意度指数
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <div  class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="row"><div class="col-sm-12"><table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr role="row">
+                                          <th   rowspan="1" colspan="1" style="width: 175px;" >情感分布指标</th>
+                                        <th  rowspan="1" colspan="1" style="width: 202px;">正向贴数</th>
+                                        <th rowspan="1" style="width: 184px;">正向占比</th>
+                                        <th rowspan="1" colspan="1" style="width: 184px;">负向帖数</th>
+                                        <th rowspan="1" style="width: 184px;">负向占比</th>
+                                        <th rowspan="1" colspan="1" style="width: 151px;">中性帖数</th>
+                                      <th rowspan="1" style="width: 184px;"><span style="width: 151px;">中性</span>占比</th>
+                                      <th rowspan="1" colspan="1" style="width: 109px;">关注度</th></tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                    <tr class="gradeA odd" role="row">
+                                            <td class="sorting_1">收费情况</td>
+                                            <td class="">2345</td>
+                                            <td>10%</td>
+                                            <td>45345</td>
+                                            <td>10%</td>
+                                            <td class="center">14</td>
+                                            <td>10%</td>
+                                            <td class="center">1</td>
+                                        </tr><tr class="gradeA even" role="row">
+                                            <td class="sorting_1">硬件设施</td>
+                                            <td class="">34534</td>
+                                            <td>10%</td>
+                                            <td>12327</td>
+                                            <td>10%</td>
+                                            <td class="center">234</td>
+                                            <td>10%</td>
+                                            <td class="center">2</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">饮食</td>
+                                          <td class="">2345</td>
+                                          <td class="gradeA odd">10%</td>
+                                          <td class="">34534</td>
+                                          <td class="gradeA odd">10%</td>
+                                          <td class="center">14</td>
+                                          <td class="gradeA odd">10%</td>
+                                          <td class="center">3</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">交通</td>
+                                          <td class="">34534</td>
+                                          <td>10%</td>
+                                          <td class="">34534</td>
+                                          <td>10%</td>
+                                          <td class="center">234</td>
+                                          <td>10%</td>
+                                          <td class="center">4</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">购物</td>
+                                          <td class="">2345</td>
+                                          <td class="gradeA odd">10%</td>
+                                          <td class="">34534</td>
+                                          <td class="gradeA odd">10%</td>
+                                          <td class="center">14</td>
+                                          <td class="gradeA odd">10%</td>
+                                          <td class="center">5</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">服务</td>
+                                          <td class="">34534</td>
+                                          <td>10%</td>
+                                          <td>34534</td>
+                                          <td>10%</td>
+                                          <td class="center">234</td>
+                                          <td>10%</td>
+                                          <td class="center">6</td>
+                                        </tr>
+                                    </tbody>
+                                </table></div></div></div>
+                            </div>
+                            <!-- /.table-responsive -->
+                           
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>                  
+				<div class="row"><div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            正向词云
+                        </div>
+                        <div class="panel-body">
+                             <div id="my_favorite_latin_words" style="width: 100%; height: 350px; "></div>
+                        </div>
+                       
+                    </div>
+                </div>
+				<div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            负向词云
+                        </div>
+                        <div class="panel-body">
+                             <div id="my_favorite_latin_words2" style="width:100%;; height: 350px; "></div>
+                        </div>
+                       
+                    </div>
+                </div></div>
+				<div class="row">
+				<div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            情感分布
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            收费情况
+                        </div>
+                        <div class="panel-body">
+                           <div id="morris-donut-chart"></div>
+							</div>
+                        
+                    </div>
+                </div>
+				<div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            硬件设施
+                        </div>
+                        <div class="panel-body">
+                           <div id="morris-donut-chart2"></div>
+							</div>
+                        
+                    </div>
+                </div>
+				<div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            饮食
+                        </div>
+                        <div class="panel-body">
+                           <div id="morris-donut-chart3"></div>
+							</div>
+                        
+                    </div>
+                </div>
+				
+				<div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            交通
+                        </div>
+                        <div class="panel-body">
+                           <div id="morris-donut-chart4"></div>
+							</div>
+                        
+                    </div>
+                </div>
+				<div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            购物
+                        </div>
+                        <div class="panel-body">
+                           <div id="morris-donut-chart5"></div>
+							</div>
+                        
+                    </div>
+                </div>
+				<div class="col-lg-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            服务
+                        </div>
+                        <div class="panel-body">
+                           <div id="morris-donut-chart6"></div>
+							</div>
+                        
+                    </div>
+                </div>
+							</div>
+                        
+                    </div> 
+					</div></div>
+					
+					<div class="row">
+					 <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="flot-chart">
+                                <div class="flot-chart-content" id="ManYiDuQuShi" ></div>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+					</div>
+						</div>
+							<div class="tab-pane fade" id="profile">
+							<div class="bk10"></div>
+                  <div class="row"><div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           Top10 微信传播平台
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <div  class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="row"><div class="col-sm-12"><table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr role="row">
+                                          <th   rowspan="1" colspan="1" style="width: 175px;" >平台名称</th>
+                                        <th rowspan="1" style="width: 184px;">平均阅读量</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                    <tr class="gradeA odd" role="row">
+                                            <td class="sorting_1">平凉易攻略</td>
+                                            <td>10%</td>
+                                        </tr><tr class="gradeA even" role="row">
+                                            <td class="sorting_1">123422</td>
+                                            <td>10%</td>
+                                            </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">饮食</td>
+                                          <td class="gradeA odd">123422</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">平凉易攻略 <img src="images/ico_r.png" width="16" height="16"></td>
+                                          <td>10%</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">平凉易攻略 <img src="images/ico_r.png" width="16" height="16"></td>
+                                          <td class="gradeA odd">123422</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">服务</td>
+                                          <td>10%</td>
+                                        </tr>
+                                    </tbody>
+                                </table></div></div></div>
+                            </div>
+                            <!-- /.table-responsive -->
+                           
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+				 <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           Top10 微博传播账号
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <div  class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="row"><div class="col-sm-12"><table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr role="row">
+                                          <th   rowspan="1" colspan="1" style="width: 175px;" >作者昵称</th>
+                                        <th rowspan="1" style="width: 184px;">文章数</th>
+                                        <th rowspan="1" style="width: 184px;">粉丝数</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                    <tr class="gradeA odd" role="row">
+                                            <td class="sorting_1">平凉易攻略 <img src="images/nan.png" width="12" height="12"> <img src="images/v2.png" width="13" height="11"></td>
+                                            <td>10%</td>
+                                            <td>23</td>
+                                        </tr>
+                                    <tr class="gradeA even" role="row">
+                                        <td class="sorting_1">123422</td>
+                                        <td>10%</td>
+                                            <td>354</td>
+                                        </tr>
+                                        <tr class="gradeA even" 平凉易攻略="row">
+                                          <td class="sorting_1">饮食<img src="images/nv.png" width="12" height="12"> <img src="images/v1.png" width="13" height="11"></td>
+                                          <td class="gradeA odd">123422</td>
+                                          <td class="gradeA odd">878</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">平凉易攻略</td>
+                                          <td>10%</td>
+                                          <td>67</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">平凉易攻略</td>
+                                          <td class="gradeA odd">123422</td>
+                                          <td class="gradeA odd">978</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">服务</td>
+                                          <td>10%</td>
+                                          <td>456</td>
+                                        </tr>
+                                    </tbody>
+                                </table></div></div></div>
+                            </div>
+                            <!-- /.table-responsive -->
+                           
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div></div>
+				<div class="row"><div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           Top10 微信阅读量文章
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <div  class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="row">
+                                  <div class="col-sm-12"><table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr role="row">
+                                          <th   rowspan="1" colspan="1" style="width: 175px;" >文章标题</th>
+                                        <th rowspan="1" style="width: 184px;">阅读量</th>
+                                        <th rowspan="1" style="width: 184px;">点赞数</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                    <tr class="gradeA odd" role="row">
+                                            <td class="sorting_1">易攻易攻略易攻略易攻略易攻略易攻略易攻略略</td>
+                                            <td>10334</td>
+                                            <td>234</td>
+                                        </tr>
+                                    <tr class="gradeA even" role="row">
+                                        <td class="sorting_1">123422</td>
+                                        <td>102342</td>
+                                            <td>234</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食</td>
+                                          <td class="gradeA odd">123422</td>
+                                          <td class="gradeA odd">55</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食</td>
+                                          <td>10335</td>
+                                          <td>234</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食</td>
+                                          <td class="gradeA odd">123422</td>
+                                          <td class="gradeA odd">56</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食</td>
+                                          <td>10123123</td>
+                                          <td>346</td>
+                                        </tr>
+                                    </tbody>
+                                </table></div></div></div>
+                            </div>
+                            <!-- /.table-responsive -->
+                           
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           Top10 微博阅读量文章
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <div  class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="row"><div class="col-sm-12"><table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr role="row">
+                                          <th   rowspan="1" colspan="1" style="width: 175px;" >文章内容</th>
+                                        <th rowspan="1" style="width: 184px;">阅读量</th>
+                                        <th rowspan="1" style="width: 184px;">点赞数</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                    <tr class="gradeA odd" role="row">
+                                            <td class="sorting_1">易攻易攻略易攻略易攻略易攻略易攻略易攻略略</td>
+                                            <td>10334</td>
+                                            <td>234</td>
+                                        </tr>
+                                    <tr class="gradeA even" role="row">
+                                        <td class="sorting_1">123422</td>
+                                        <td>102342</td>
+                                            <td>234</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食</td>
+                                          <td class="gradeA odd">123422</td>
+                                          <td class="gradeA odd">55</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食</td>
+                                          <td>10335</td>
+                                          <td>234</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食</td>
+                                          <td class="gradeA odd">123422</td>
+                                          <td class="gradeA odd">56</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食饮食</td>
+                                          <td>10123123</td>
+                                          <td>346</td>
+                                        </tr>
+                                    </tbody>
+                                </table></div></div></div>
+                            </div>
+                            <!-- /.table-responsive -->
+                           
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div></div>
+				<div class="row"><div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           访客分布
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <div  class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="row">
+                                  <div class="col-sm-12">
+								  	            <div id="ChinaMap2"></div>
+
+	          
+								  </div></div></div>
+                            </div>
+                            <!-- /.table-responsive -->
+                           
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           Top10 水军用户
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <div  class="dataTables_wrapper form-inline dt-bootstrap no-footer"><div class="row"><div class="col-sm-12"><table class="table table-striped table-bordered table-hover dataTable no-footer" id="dataTables-example" role="grid" aria-describedby="dataTables-example_info">
+                                    <thead>
+                                        <tr role="row">
+                                          <th   rowspan="1" colspan="1" style="width: 175px;" >作者昵称</th>
+                                        <th rowspan="1" style="width: 184px;">文章数</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                       
+                                    <tr class="gradeA odd" role="row">
+                                            <td class="sorting_1"><img src="images/1.jpg" height="20">写下寂寞</td>
+                                            <td>10334</td>
+                                        </tr>
+                                    <tr class="gradeA even" role="row">
+                                        <td class="sorting_1">123422</td>
+                                        <td>102342</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1"><img src="images/2.jpg" height="20">写下寂寞</td>
+                                          <td class="gradeA odd">123422</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">写下寂寞</td>
+                                          <td>10335</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">写下寂寞</td>
+                                          <td class="gradeA odd">123422</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">写下寂寞</td>
+                                          <td>10123123</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">写下寂寞</td>
+                                          <td>10123123</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">写下寂寞</td>
+                                          <td>10123123</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">写下寂寞</td>
+                                          <td>10123123</td>
+                                        </tr>
+                                        <tr class="gradeA even" role="row">
+                                          <td class="sorting_1">写下寂寞</td>
+                                          <td>10123123</td>
+                                        </tr>
+                                    </tbody>
+                                </table></div></div></div>
+                            </div>
+                            <!-- /.table-responsive -->
+                           
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div></div>
+                                </div>
+                                <div class="tab-pane fade" id="messages">
+								<div class="bk10"></div>
+								<div class="row"><div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           声量总额走势
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                          <div class="flot-chart">
+                                <div class="flot-chart-content" id="shengliangzoushi" ></div>
+                            </div>
+                          
+                           
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div></div>
+				<div class="bk10"></div>
+								<div class="row"><div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                           声量总额走势
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                          <div class="flot-chart">
+                                <div class="flot-chart-content" id="shengliangzhengfu" ></div>
+                            </div>
+                          
+                           
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div></div>
+                                   
+                                </div>
+                                	
+                                </div>
+                                
+                          
+                        </div>
+						
+                        <!-- /.panel-body -->
+                    </div>
+                     <!-- /.del -->
+                    <!-- /.panel -->
+                </div>
+				</div>
+			
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="__PUBLIC__/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="__PUBLIC__/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="__PUBLIC__/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+	
+	
+	  <!-- Morris Charts JavaScript -->
+    <script src="__PUBLIC__/bower_components/raphael/raphael-min.js"></script>
+    <script src="__PUBLIC__/bower_components/morrisjs/morris.min.js"></script>
+
+
+    <!-- Custom Theme JavaScript -->
+	<script type="text/javascript" src="__PUBLIC__/js/jqcloud/jqcloud-1.0.4.js"></script>
+	<script src="__PUBLIC__/js/highcharts.js"></script>
+	<script src="__PUBLIC__/js/exporting.js"></script>
+    <script src="__PUBLIC__/dist/js/sb-admin-2.js"></script>
+     <!-- 地图 -->
+    <script type="text/javascript" src="__PUBLIC__/js/lib/raphael-min.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/js/res/chinaMapConfig.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/js/res/worldMapConfig.js"></script>
+	<script type="text/javascript" src="__PUBLIC__/js/map.js"></script>
+    <script>
+    $(function(){
+        $.post('__APP__/common/ajaxGetMenu',function(data){
+          $("#menu").html(data);
+          $("#menu ul li ul li a ").removeClass("active");
+          var c = "<?php echo MODULE_NAME.ACTION_NAME; ?>";
+          var d = "<?php echo MODULE_NAME?>";
+          //$('#menu ul li .'+d+'').addClass("active");
+          $('#menu ul li ul li .'+c+'').addClass("active");
+          $('#menu ul li ul li .'+c+'').parent().parent().addClass("in");
+          $('#menu ul li ul li .'+c+'').parent().parent().attr("aria-expanded","true");
+
+        })       
+    })
+</script>
+     <!-- 地图 -->
+<script type="text/javascript">
+      var word_list = [
+        {text: "不错", weight: 13},
+        {text: "Ipsum", weight: 10.5},
+        {text: "Dolor", weight: 9.4},
+        {text: "Sit", weight: 8},
+        {text: "Amet", weight: 6.2},
+        {text: "Consectetur", weight: 5},
+        {text: "Adipiscing", weight: 5},
+        {text: "Elit", weight: 5},
+        {text: "Nam et", weight: 5},
+        {text: "Leo", weight: 4},
+        {text: "Sapien", weight: 4},
+        {text: "Pellentesque", weight: 3},
+        {text: "habitant", weight: 3},
+        {text: "morbi", weight: 3},
+        {text: "tristisque", weight: 3},
+        {text: "senectus", weight: 3},
+        {text: "et netus", weight: 3},
+        {text: "et malesuada", weight: 3},
+        {text: "fames", weight: 2},
+        {text: "ac turpis", weight: 2},
+        {text: "egestas", weight: 2},
+        {text: "Aenean", weight: 2},
+        {text: "vestibulum", weight: 2},
+        {text: "elit", weight: 2},
+        {text: "sit amet", weight: 2},
+        {text: "metus", weight: 2},
+        {text: "adipiscing", weight: 2},
+        {text: "ut ultrices", weight: 2},
+        {text: "justo", weight: 1},
+        {text: "dictum", weight: 1},
+        {text: "Ut et leo", weight: 1},
+        {text: "metus", weight: 1},
+        {text: "at molestie", weight: 1},
+        {text: "purus", weight: 1},
+        {text: "Curabitur", weight: 1},
+        {text: "diam", weight: 1},
+        {text: "dui", weight: 1},
+        {text: "ullamcorper", weight: 1},
+        {text: "id vuluptate ut", weight: 1},
+        {text: "mattis", weight: 1},
+        {text: "et nulla", weight: 1},
+        {text: "Sed", weight: 1}
+      ];
+      $(function() {
+        $("#my_favorite_latin_words").jQCloud(word_list, {shape: "rectangular"});
+		$("#my_favorite_latin_words2").jQCloud(word_list, {shape: "rectangular"});
+      });
+	  $(function() {
+
+    Morris.Donut({
+        element: 'morris-donut-chart',
+        data: [{
+            label: "正向",
+            value: 12
+        }, {
+            label: "负向",
+            value: 30
+        }, {
+            label: "中性",
+            value: 20
+        }],
+		
+		
+        resize: true
+    });
+Morris.Donut({
+        element: 'morris-donut-chart2',
+        data: [{
+            label: "正向",
+            value: 12
+        }, {
+            label: "负向",
+            value: 30
+        }, {
+            label: "中性",
+            value: 20
+        }],
+		
+        resize: true
+    });
+   Morris.Donut({
+        element: 'morris-donut-chart3',
+        data: [{
+            label: "正向",
+            value: 12
+        }, {
+            label: "负向",
+            value: 30
+        }, {
+            label: "中性",
+            value: 20
+        }],
+		
+        resize: true
+    });
+Morris.Donut({
+        element: 'morris-donut-chart4',
+        data: [{
+            label: "正向",
+            value: 12
+        }, {
+            label: "负向",
+            value: 30
+        }, {
+            label: "中性",
+            value: 20
+        }],
+		
+        resize: true
+    });
+	Morris.Donut({
+        element: 'morris-donut-chart5',
+        data: [{
+            label: "正向",
+            value: 12
+        }, {
+            label: "负向",
+            value: 30
+        }, {
+            label: "中性",
+            value: 48
+        }],
+		
+        resize: true
+    });
+	Morris.Donut({
+        element: 'morris-donut-chart6',
+        data: [{
+            label: "正向",
+            value: 10
+        }, {
+            label: "负向",
+            value: 30
+        }, {
+            label: "中性",
+            value: 60
+        }],
+		
+        resize: true
+    });
+	//QuShi
+	 $('#ManYiDuQuShi').highcharts({
+        title: {
+            text: '满意度趋势走势图',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '（2015年1月1日-2015年12月31日）',
+            x: -20
+        },
+        xAxis: {
+            categories: ['01', '02', '03', '04', '05', '06',
+                '07', '08', '09', '10', '11', '12']
+        },
+        yAxis: {
+            title: {
+                text: '数量'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ''
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '正向',
+            data: [700, 609, 905, 1405, 1802, 2105, 2502, 2605, 2303, 1803, 1309, 906]
+        }, {
+            name: '负向',
+            data: [20, 80, 507, 1103, 1700, 2200, 2408, 2401, 2001, 1401, 806, 205]
+        }, {
+            name: '中性',
+            data: [90, 60, 305, 804, 130, 1700, 1806, 1709, 1403, 90, 309, 100]
+        }]
+    });
+	//--qushi end
+	//声量走势
+	 $('#shengliangzoushi').highcharts({
+        title: {
+            text: '声量总额走势图',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '（2015年1月1日-2015年12月31日）',
+            x: -20
+        },
+        xAxis: {
+            categories: ['01', '02', '03', '04', '05', '06',
+                '07', '08', '09', '10', '11', '12']
+        },
+        yAxis: {
+            title: {
+                text: '数量'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ''
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '声量',
+            data: [700, 609, 905, 1405, 1802, 2105, 2502, 2605, 2303, 1803, 1309, 906]
+        }]
+    });
+	//shengliangzoushi end
+	//shengliangzhengfu
+	 $('#shengliangzhengfu').highcharts({
+        title: {
+            text: '正负声量趋势',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '（2015年1月1日-2015年12月31日）',
+            x: -20
+        },
+        xAxis: {
+            categories: ['01', '02', '03', '04', '05', '06',
+                '07', '08', '09', '10', '11', '12']
+        },
+        yAxis: {
+            title: {
+                text: '数量'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ''
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+        },
+        series: [{
+            name: '正向',
+            data: [700, 609, 905, 1405, 1802, 2105, 2502, 2605, 2303, 1803, 1309, 906]
+        }, {
+            name: '负向',
+            data: [20, 80, 507, 1103, 1700, 2200, 2408, 2401, 2001, 1401, 806, 205]
+        }, {
+            name: '中性',
+            data: [90, 60, 305, 804, 130, 1700, 1806, 1709, 1403, 90, 309, 100]
+        }]
+    });
+});
+$('#ChinaMap2').SVGMap({
+		mapName: 'china',
+		stateData: {
+	                'heilongjiang': {'stateInitColor': 1, 'baifenbi': 0.236},
+	                'beijing': {'stateInitColor': 2},
+	                'shanghai': {'stateInitColor': 3},
+	                'tianjin': {'stateInitColor': 4},
+	                'sichuan': {'stateInitColor': 5},
+	                'shandong': {'stateInitColor': 6},
+	                'shanxi': {'stateInitColor': 3},
+	                'zhejiang': {'stateInitColor': 4},
+	                'jiangshu': {'stateInitColor': 2},
+	                'hunan': {'stateInitColor': 4},
+	                'guizou': {'stateInitColor': 5},
+	                'neimenggu': {'stateInitColor': 6},
+	                'henan': {'stateInitColor': 3},
+	                'gansu': {'stateInitColor': 4},
+	                'ningxia': {'stateInitColor': 2},
+	                'jilin': {'diabled': true}
+            	}
+	});
+    </script>
+
+<script type="text/javascript">
+$(function(){
+	$('#ChinaMap2').SVGMap({
+		mapName: 'china',
+		stateData: {
+	                'heilongjiang': {'stateInitColor': 1, 'baifenbi': 0.236},
+	                'beijing': {'stateInitColor': 2},
+	                'shanghai': {'stateInitColor': 3},
+	                'tianjin': {'stateInitColor': 4},
+	                'sichuan': {'stateInitColor': 5},
+	                'shandong': {'stateInitColor': 6},
+	                'shanxi': {'stateInitColor': 3},
+	                'zhejiang': {'stateInitColor': 4},
+	                'jiangshu': {'stateInitColor': 2},
+	                'hunan': {'stateInitColor': 4},
+	                'guizou': {'stateInitColor': 5},
+	                'neimenggu': {'stateInitColor': 6},
+	                'henan': {'stateInitColor': 3},
+	                'gansu': {'stateInitColor': 4},
+	                'ningxia': {'stateInitColor': 2},
+	                'jilin': {'diabled': true}
+            	},
+		stateTipHtml: function(stateData, obj){
+       // return 'id:' + ((stateData)[obj.id] && (stateData)[obj.id].baifenbi || obj.id) + '<br>name:' + obj.name;
+		return obj.name+'<br>'+'平凉：112<br>平凉：112<br>平凉：112<br>平凉：112<br>平凉：112<br>';
+    }
+
+	});
+
+
+	// $.ajax({
+	// 	url: projectName+'/idea123Action.do?method=getIdea123MapData&reportName='+reportName,
+	// 	data: data,
+	// 	dataType: 'json',
+	// 	success: function(data){
+
+	var data = {"jiangsu":{"value":"30.05%","index":"1","stateInitColor":"0"},"henan":{"value":"19.77%","index":"2","stateInitColor":"0"},"anhui":{"value":"10.85%","index":"3","stateInitColor":"0"},"zhejiang":{"value":"10.02%","index":"4","stateInitColor":"0"},"liaoning":{"value":"8.46%","index":"5","stateInitColor":"0"},"beijing":{"value":"4.04%","index":"6","stateInitColor":"1"},"hubei":{"value":"3.66%","index":"7","stateInitColor":"1"},"jilin":{"value":"2.56%","index":"8","stateInitColor":"1"},"shanghai":{"value":"2.47%","index":"9","stateInitColor":"1"},"guangxi":{"value":"2.3%","index":"10","stateInitColor":"1"},"sichuan":{"value":"1.48%","index":"11","stateInitColor":"2"},"guizhou":{"value":"0.99%","index":"12","stateInitColor":"2"},"hunan":{"value":"0.78%","index":"13","stateInitColor":"2"},"shandong":{"value":"0.7%","index":"14","stateInitColor":"2"},"guangdong":{"value":"0.44%","index":"15","stateInitColor":"2"},"jiangxi":{"value":"0.34%","index":"16","stateInitColor":"3"},"fujian":{"value":"0.27%","index":"17","stateInitColor":"3"},"yunnan":{"value":"0.23%","index":"18","stateInitColor":"3"},"hainan":{"value":"0.21%","index":"19","stateInitColor":"3"},"shanxi":{"value":"0.11%","index":"20","stateInitColor":"3"},"hebei":{"value":"0.11%","index":"21","stateInitColor":"4"},"neimongol":{"value":"0.04%","index":"22","stateInitColor":"4"},"tianjin":{"value":"0.04%","index":"23","stateInitColor":"4"},"gansu":{"value":"0.04%","index":"24","stateInitColor":"4"},"shaanxi":{"value":"0.02%","index":"25","stateInitColor":"4"},"macau":{"value":"0.0%","index":"26","stateInitColor":"7"},"hongkong":{"value":"0.0%","index":"27","stateInitColor":"7"},"taiwan":{"value":"0.0%","index":"28","stateInitColor":"7"},"qinghai":{"value":"0.0%","index":"29","stateInitColor":"7"},"xizang":{"value":"0.0%","index":"30","stateInitColor":"7"},"ningxia":{"value":"0.0%","index":"31","stateInitColor":"7"},"xinjiang":{"value":"0.0%","index":"32","stateInitColor":"7"},"heilongjiang":{"value":"0.0%","index":"33","stateInitColor":"7"},"chongqing":{"value":"0.0%","index":"34","stateInitColor":"7"}};
+			var i = 1;
+			for(k in data){
+				if(i <= 12){
+					var _cls = i < 4 ? 'active' : ''; 
+					$('#MapControl .list1').append('<li name="'+k+'"><div class="mapInfo"><i class="'+_cls+'">'+(i++)+'</i><span>'+chinaMapConfig.names[k]+'</span><b>'+data[k].value+'</b></div></li>')
+				}else if(i <= 24){
+					$('#MapControl .list2').append('<li name="'+k+'"><div class="mapInfo"><i>'+(i++)+'</i><span>'+chinaMapConfig.names[k]+'</span><b>'+data[k].value+'</b></div></li>')
+				}else{
+					$('#MapControl .list3').append('<li name="'+k+'"><div class="mapInfo"><i>'+(i++)+'</i><span>'+chinaMapConfig.names[k]+'</span><b>'+data[k].value+'</b></div></li>')
+				}
+			}
+
+			var mapObj_1 = {};
+			var stateColorList = ['003399', '0058B0', '0071E1', '1C8DFF', '51A8FF', '82C0FF', 'AAD5ee', 'AAD5FF'];
+			
+			$('#RegionMap').SVGMap({
+				external: mapObj_1,
+				mapName: 'china',
+				mapWidth: 350,
+				mapHeight: 350,
+				stateData: data,
+				// stateTipWidth: 118,
+				// stateTipHeight: 47,
+				// stateTipX: 2,
+				// stateTipY: 0,
+				stateTipHtml: function (mapData, obj) {
+					var _value = mapData[obj.id].value;
+					var _idx = mapData[obj.id].index;
+					var active = '';
+					_idx < 4 ? active = 'active' : active = '';
+					var tipStr = '<div class="mapInfo"><i class="' + active + '">' + _idx + '</i><span>' + obj.name + '</span><b>' + _value + '</b></div>';
+					return tipStr;
+				}
+			});
+			$('#MapControl li').hover(function () {
+				var thisName = $(this).attr('name');
+				
+				var thisHtml = $(this).html();
+				$('#MapControl li').removeClass('select');
+				$(this).addClass('select');
+				$(document.body).append('<div id="StateTip"></div');
+				$('#StateTip').css({
+					left: $(mapObj_1[thisName].node).offset().left - 50,
+					top: $(mapObj_1[thisName].node).offset().top - 40
+				}).html(thisHtml).show();
+				mapObj_1[thisName].attr({
+					fill: '#E99A4D'
+				});
+			}, function () {
+				var thisName = $(this).attr('name');
+
+				$('#StateTip').remove();
+				$('#MapControl li').removeClass('select');
+				mapObj_1[$(this).attr('name')].attr({
+					fill: "#" + stateColorList[data[$(this).attr('name')].stateInitColor]
+				});
+			});
+			
+			$('#MapColor').show();
+	// 	}
+	// });
+
+
+	
+});
+</script>
+</body>
+
+</html>

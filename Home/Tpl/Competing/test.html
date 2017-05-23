@@ -1,0 +1,318 @@
+<?php
+class CompetingAction extends CommonAction {
+    public function mng_mission_competing(){
+        //查出所有的主任务
+
+
+
+        $dbo = M("query_task");
+        $sql = "select id,web_site,kwds from query_task where task_type=1 order by id";
+        $zhu_list = $dbo->query($sql);        
+        //查出所有的竞品任务
+        //$sql = "select id,web_site,kwds from query_task where task_type=2";
+        //$fu_list = $dbo->query($sql);
+        //查出第一个主任务对应的竞品任务
+        $zhu_id = $zhu_list[0]['id'];
+        $sql = "select id,web_site from query_task where competingproducts_id=$zhu_id";
+        $cid = $dbo->query($sql);
+        $web_site = $cid[0]['web_site'];
+        $id = $cid[0]['id'];
+        $sql = "select id,web_site,kwds from query_task_detail where query_task_id=$id group by kwds";
+
+        $fu_list = $dbo->query($sql);
+        //echo $sql;
+        //var_dump($web_site);die;
+        if($web_site=="1,2"){
+            $web_site = 4;
+        }
+
+//显示数据获取
+
+        $sql = "select c.*,q.kwds from competingproduct_task c left join query_task q on c.zhu_kwds=q.id";
+        $list = $dbo->query($sql);
+
+
+
+
+        $this->assign('zhu_list',$zhu_list);
+        $this->assign('fu_list',$fu_list);
+        $this->assign('web_site',$web_site);
+        $this->assign('list',$list);
+
+
+
+        $this->display();
+
+    }    
+
+//根据ID得到对应的竞品任务
+    public function ajaxGetCompetingById(){
+        $zhu_id = $_POST['id'];
+        $dbo    = M("query_task_detail");
+        $sql    = "select id from query_task where competingproducts_id=$zhu_id";
+        $cid    = $dbo->query($sql);
+        $cid    = $cid[0]['id'];
+        $sql    = "select id,web_site,kwds from query_task_detail where query_task_id=$cid group by kwds";
+        $fu_list = $dbo->query($sql);
+        $html ='';
+        foreach($fu_list as $v){
+            $kwds       = $v["kwds"];
+            $id         = $v["id"];
+            $html.= "<input type='checkbox' name='competing' field='$kwds' value='".$id."'>$kwds";
+        }
+        echo $html; 
+    }
+    //根据ID得到对应的website
+    public function ajaxGetWebSiteById(){
+        $zhu_id = $_POST['id'];
+        $dbo    = M("query_task_detail");
+        $sql    = "select web_site from query_task where competingproducts_id=$zhu_id";
+        $web_site    = $dbo->query($sql);
+        $web_site    = $web_site[0]['web_site'];
+
+        $html ='<label>数据来源</label>';
+        if($web_site=="1,3"){
+            $html .= "<label class='checkbox-inline'>
+                                                  <input type='checkbox' name='data' value='3'>微博
+                                              </label>
+                                              <label class='checkbox-inline'>
+                                                  <input type='checkbox' name='data' value='1'>微信
+                                              </label>";
+        }elseif($web_site=="1"){
+            $html .= "<label class='checkbox-inline'>
+                                                  <input type='checkbox' name='data' value='1'>微信
+                                              </label>";
+        }else{
+            $html .= "<label class='checkbox-inline'>
+                                                  <input type='checkbox' name='data' value='3'>微博
+                                              </label>";
+        }
+        echo $html;
+    }
+//添加竞品任务
+    public function ajaxAddCompeting(){
+        $zhu_renwu  = $_POST['zhu_renwu'];
+        $date       = $_POST['date'];
+        $date1      = $_POST['date1'];
+        $ganqing    = $_POST['ganqing'];
+        $pic        = $_POST['pic'];
+        $fu_kwds_view = rtrim($_POST['fu_kwds_view'],',');
+        $competing  = rtrim($_POST['competing'],',');
+        $data       = rtrim($_POST['data'],',');
+        $now        = date('Y-m-d',time());
+        //var_dump($_POST);die;
+        if($date=='date1'){
+            $d = date('Y-m-d', strtotime("-30 day"));
+            $date_frame = $d.'--'.$now;
+            $time_view = '最近30天';
+            $where = " where create_time>'$d' and create_time<='$now' ";
+        }else if($date=='date2'){
+            $d = date('Y-m-d', strtotime("-60 day"));
+            $date_frame = $d.'--'.$now;
+            $time_view = '最近60天';
+            $where = " where create_time>'$d' and create_time<='$now' ";
+        }else if($date=='date3'){
+            $d = date('Y-m-d', strtotime("-90 day"));
+            $date_frame = $d.'--'.$now;
+            $time_view = '最近90天';
+            $where = " where create_time>'$d' and create_time<='$now' ";
+        }else if($date=='date4'){
+            $d = date('Y-m-d', strtotime("-365 day"));
+            $date_frame = $d.'--'.$now;
+            $time_view = '最近1年';
+            $where = " where create_time>'$d' and create_time<='$now' ";
+        }else if($date=='date5'){
+            $date_frame = $date1;
+            $time_view = $date_frame;
+            $arr = explode("--", $date1);
+            $start = $arr[0];
+            $end = $arr[1];
+            $where = " where create_time>'$start' and create_time<='$end' ";
+        }
+        $dbo = M("competingproduct_task");
+        $sql = "insert into competingproduct_task(zhu_kwds,fu_kwds,graph_type,time_frame,partial,web_site,time_view,create_time,fu_kwds_view) values('$zhu_renwu','$competing','$pic','$date_frame','$ganqing','$data','$time_view',NOW(),'$fu_kwds_view')";
+        $dbo = M("competingproduct_task");
+        $new_id = 0;
+        if($dbo->execute($sql)){
+            echo 'ok';
+            $new_id = mysql_insert_id();
+        }else{
+            echo 'no';
+        }
+//主
+$sql = "select kwds from query_task where id=$zhu_renwu";
+$r = $dbo->query($sql);
+$zhu_renwu_kwds = $r[0]['kwds'];
+//副
+$sql = "select query_task_id from query_task_detail where id=$competing";
+$r = $dbo->query($sql);
+$fu_renwu_kwds = $r[0]['query_task_id'];
+/*$sql = "select id from query_task where id=$fu_renwu_kwds";
+$r = $dbo->query($sql);*/
+$zhu_renwu_id = $r[0]['query_task_id'];
+
+//拿到总天数、和详细天数
+$sql = "select count(*)c from rili $where ";
+$r = $dbo->query($sql);
+$c = $r[0]['c'];
+$sql = "select * from rili $where ";
+$create_time = $dbo->query($sql);
+
+//拿到主任务数据
+$sql = "select count(*) c,SUBSTR(create_time,1,10) d from article $where and task_id=$zhu_renwu group by CONCAT(SUBSTR(create_time,1,10),' 00:00:00') ";
+$list  =$dbo->query($sql);
+
+$str = "";
+for($i=0;$i<$c;$i++){
+    $date = $create_time[$i]['create_time'];
+    if($create_time[$i]['id']<27){
+        $a = 0;$b = 0;
+    }else{
+        $a = rand(250,400);
+        $b = rand(200,300);
+    }
+    $str.='{"dateX": "'.$date.'", "kts": '.$a.', "ems": '.$b.'},';
+}
+//var_dump($str);die;
+/*
+    foreach($list as $v){
+        $date = $v['d'];
+        $count = $v['c'];
+        if($date==)
+        $str.='{"dateX": "$v[]", "kts": 3407, "ems": 660},';
+    }*/
+
+
+
+//创建静态页面
+    $url = 'http://'.$_SERVER['HTTP_HOST'].'/da/html/model.html';
+    $template = file_get_contents($url);
+    $html = '/alidata/www/sjmf/da/Home/Tpl/Competing/'.$new_id.'.html';
+    //$kwds = "xxxxx";
+    $content = ' <script> $(function(){
+     var tax_data = [
+       '.$str.'
+  ];
+  Morris.Line({
+    element: "morris-line",
+    data: tax_data,
+    xkey: "dateX",
+    lineColors:[ "#5B9BD5", "#ED7D31"], 
+    ykeys: ["kts", "ems"],
+    labels: ["'.$zhu_renwu_kwds.'", "'.$fu_kwds_view.'"]
+  });
+Morris.Bar({
+  element: "morris-bar",
+  data: [
+    {x: "2011 Q1", y: 3, z: 2, a: 3},
+    {x: "2011 Q2", y: 2, z: null, a: 1},
+    {x: "2011 Q3", y: 0, z: 2, a: 4},
+    {x: "2011 Q4", y: 2, z: 4, a: 3}
+  ],
+  xkey: "x",
+  ykeys: ["y", "z", "a"],
+  labels: ["Y", "Z", "A"]
+}).on("click", function(i, row){
+  console.log(i, row);
+});
+});
+</script>
+';
+    //$output = str_replace('<{zhu_renwu}>', $$zhu_renwu_kwds.'--'.$fu_kwds_view, $template);
+    //$output = str_replace('<{time_view}>', $time_view, $template);
+    $output = str_replace('<{content}>', $content, $template);
+    file_put_contents($html, $output);
+
+    }
+
+//删除竞品任务
+    function ajaxDelCompeting(){
+        if(M("competingproduct_task")->where("id=".$_POST['id'])->delete()){
+            echo 'ok';
+        }else{
+            echo 'no';
+        }
+    }
+
+
+function test(){
+    $dbo        = M("competingproduct_task");
+        //拿到主任务数据
+    $sql        = "select count(*) c,SUBSTR(create_time,1,10) d from article where create_time>'2016-09-05' and create_time<='2016-09-12' and task_id=44 group by CONCAT(SUBSTR(create_time,1,10),' 00:00:00') ";
+    $list_zhu  =$dbo->query($sql);
+        //拿到副任务数据
+    $sql        = "select count(*) c,SUBSTR(create_time,1,10) d from article where create_time>'2016-09-05' and create_time<='2016-09-12' and task_id=45 group by CONCAT(SUBSTR(create_time,1,10),' 00:00:00') ";
+    $list_fu  =$dbo->query($sql);
+
+    $sql        = "select create_time from rili where create_time>'2016-09-05' and create_time<='2016-09-12'";
+    $rili       = $dbo->query($sql);
+    $arr = array();
+    foreach($rili as $v){
+        $arr[]='{"dateX": "'.$v['create_time'].'", "kts": 0, "ems": 0},';
+    }
+    foreach($arr as $k=>$v){
+        foreach ($list_zhu as $v1) {
+            if(strpos($v, $v1['d']) !== false){
+                $arr[$k]=str_replace('"kts": 0', $v1['c'], $v);
+            }
+        }
+    }
+    foreach($arr as $k=>$v){
+        foreach($list_fu as $v2){
+            if(strpos($v, $v2['d']) !== false){
+                $arr[$k]=str_replace('"ems": 0', '"ems":'.$v2['c'], $v);
+            }            
+        }
+    }
+foreach ($arr as $key => $value) {
+    $result = $value;
+}
+    
+
+
+    $this->display();
+
+
+
+}
+
+
+
+
+
+
+    public function user_view(){
+
+        $this->display();
+
+    }  
+    public function mng_mission_competing_result(){
+
+        $this->display();
+
+    }
+    public function mng_mission_competingproducts_except(){
+		$dbo = M("query_task");
+		$sql = "select id,task_name,web_site,article_count,start_time,end_time,status,kwds from query_task where task_type=2";
+		$list = $dbo->query($sql);
+		$this->assign('list',$list);
+        $this->display();
+
+    }
+    public function mng_mission_competingproducts_except_detail(){
+    	$id = $_GET['id'];
+    	$competingproducts_id = M("query_task")->where('id='.$id)->field('competingproducts_id')->find();
+    	$c = $competingproducts_id['competingproducts_id'];
+    	$zhu_kwds = M("query_task")->where('id='.$c)->field('kwds,id')->find();
+    	$this->assign('zhu_kwds',$zhu_kwds['kwds']);
+
+        $list = M("competingproduct_del")->where("competingproduct_id=".$id)->select();
+        $this->assign('list',$list);
+
+        $this->display();
+
+    }
+
+
+    
+}

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>大数据监测指挥中心 - 添加节点</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="__PUBLIC__/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="__PUBLIC__/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="__PUBLIC__/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="__PUBLIC__/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+</head>
+<body>
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <include file="Public:header" />
+            <!-- /.navbar-top-links -->
+            <div class="navbar-default sidebar" role="navigation" id="menu">
+                <include file="Public:menu" />
+            <!-- /.navbar-static-side -->
+            </div>
+        </nav>
+        <!-- Page Content -->
+        <div id="page-wrapper">
+            <div class="container-fluid">
+				<form  onsubmit="return check_form()" method="post" action="" name="form1">
+					<table class="Form" width="750" border="1">
+						<tbody>
+							<tr>
+								<th colspan="6"> </th>
+							</tr>
+							<tr>
+								<td rowspan="6">
+									<select id="sort_list" style="width:400px" size="18" name="sort_list">
+										<option value="">
+											<span>1：菜单英文名称一级菜单首字母大写</span><br>
+										</option>
+										<option value="">
+											<span>2：菜单英文名称二级菜单一律为小写</span><br>
+										</option>
+									</select>
+								</td>
+								<td align="right">菜单英文名称</td>
+								<td align="left">
+									<input id="menuEnglish" class="EditBox" type="text" name="sort_name">
+								</td>
+							</tr>
+							<tr>
+								<td align="right">菜单中文名称</td>
+								<td align="left">
+									<input id="menuChinese" class="EditBox" type="text" name="sort_name">
+								</td>
+							</tr>
+							<tr>
+								<td align="right">菜单排序序号</td>
+								<td align="left">
+									<input id="sort" class="EditBox" type="text" name="sort_name">
+								</td>
+							</tr>							
+							<tr>
+								<td align="right">菜单显示状态</td>
+								<td align="left">
+									<select style="width:100px"name="" id="type">
+										<option value="1">显示</option>
+										<option value="0">隐藏 </option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td align="right">菜单显示级别</td>
+								<td align="left">
+									<select style="width:100px"name="" id="level" onchange="change()">
+										<option value="2">一级菜单</option>
+										<option value="3">二级菜单</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td align="right">菜单父级选项</td>
+								<td align="left">
+									<select style="width:100px"name="" id="pid">
+										
+									</select>
+								</td>
+							</tr>					
+							<tr>
+								<th align="center" colspan="4">
+									<input id="button" class="ButtonCss" type="submit" value="提交" name="button">
+									<input id="reset" class="ButtonCss" type="reset" value="重置" name="reset">
+									<span id="note" style="color:red;font-size:16px"></span>
+								</th>
+							</tr>
+						</tbody>
+					</table>
+					<br>
+				</form>
+			</div>
+		</div>
+	</div>
+    <!-- jQuery -->
+    <script src="__PUBLIC__/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="__PUBLIC__/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="__PUBLIC__/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="__PUBLIC__/dist/js/sb-admin-2.js"></script>
+    <script>
+    //加载菜单栏
+      $(function(){
+        $.post('__APP__/common/ajaxGetMenu',function(data){
+          $("#menu").html(data);
+          $("#menu ul li ul li a ").removeClass("active");
+          var c = "<?php echo MODULE_NAME.ACTION_NAME; ?>";
+          var d = "<?php echo MODULE_NAME?>";
+          //$('#menu ul li .'+d+'').addClass("active");
+          $('#menu ul li ul li .'+c+'').addClass("active");
+          $('#menu ul li ul li .'+c+'').parent().parent().addClass("in");
+          $('#menu ul li ul li .'+c+'').parent().parent().attr("aria-expanded","true");         
+        })
+      })
+
+    </script>
+<script>
+	var baseUrl="<?php echo '__ROOT__';?>";
+	$(function(){
+		$("#button").bind("click",function(){
+			check_form()
+			// $.post(baseUrl+"/rbac/addRole")
+			return false;
+		})
+	})
+	function check_form(){
+		var eng 	= $('#menuEnglish').val();
+		var chi 	= $('#menuChinese').val();
+		var type 	= $('#type').val();
+		var level 	= $('#level').val();
+		var pid 	= $('#pid').val();
+		var sort 	= $('#sort').val();
+		//var status = 
+		
+		// return;
+		if( eng == "" ){
+		ErrorInfo( "您没有输入 <font color=\'red\'>“菜单英文名称”</font> !", null, null, "信息提示");
+		//document.getElementById('account_name').focus();
+		return false;
+		}
+		if( chi == "" ){
+		ErrorInfo( "您没有输入 <font color=\'red\'>菜单中文名称</font> !", null, null, "信息提示");
+		//document.getElementById('account_passwd').focus();
+		return false; 
+		}
+
+		if((eng!='') && (chi!='')){
+			$.post(baseUrl+'/rbac/ajaxAddNode',{name:eng,title:chi,pid:pid,level:level,status:1,type:type,sort:sort},function(data){
+					if(data=='ok'){
+						$('#note').html('添加成功');
+					}else{
+						$('#note').html('添加失败');
+					}
+
+			})
+		}
+	}
+	function change(t){
+		if($('#level').val()==3){
+			$.post(baseUrl+'/rbac/getNode',function(data){
+				$('#pid').html(data);
+			},'html')
+		}else if($('#level').val()==2){
+			$('#pid').html('');
+		}
+	}
+</script>
+</body>
+</html>
